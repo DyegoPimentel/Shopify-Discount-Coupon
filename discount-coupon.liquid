@@ -1,0 +1,206 @@
+{{ 'discount-coupon.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+@media screen and (min-width: 768px) {
+    .dc_backgroundSection {
+        background-image: url({{ section.settings.dc_backgroundImage | img_url: 'master' }});
+    }
+    .dc_logoSize {
+        width: {{ section.settings.dc_logoSize }};
+    }
+}
+@media screen and (max-width: 768px) {
+    .dc_cardsBackground {
+        background-color: {{ section.settings.dc_backgroundColor }};
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .dc_backgroundSection {
+        background-color: {{ section.settings.dc_backgroundColor }};
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .dc_logoSize {
+        width:100%;
+    }
+    .dc_container h1 {
+        margin-top: 20px;
+    }
+}
+
+{%- endstyle -%}
+
+
+<div class="grid-container dc_container dc_backgroundSection">
+    
+    <div>
+        <img src="{{ section.settings.dc_logo | img_url: 'master'}}" class="dc_logoSize">
+    </div>
+    <div>
+        <h1 
+            style="
+            color:{{ section.settings.dc_headlineColor }}
+            "> 
+            {{ section.settings.dc_headline }} 
+        </h1>
+        <div 
+            style="
+            color:{{ section.settings.dc_descriptionColor }}
+            ">
+            {{ section.settings.dc_description }}
+        </div>
+        <a href="{{ section.settings.dc_buttonLink }}">
+            <button 
+                class="dc_button" 
+                style="
+                color:{{ section.settings.dc_buttonTextColor }};
+                background-color: {{ section.settings.dc_buttonBackgroundColor }};
+                font-weight: bolder;
+                ">
+                {{ section.settings.dc_buttonText }}
+            </button>
+        </a>
+    </div>
+    
+</div>
+<div class="dc_cards dc_cardsBackground">
+
+    {% for block in section.blocks %}
+        {% case block.type %}
+            {% when 'card' %}
+                <div class="dc_card">
+                    <div class="dc_cardTop">
+                        <h2 style="color: {{ section.settings.dc_backgroundColor }};">
+                            CUPOM DE ATÉ
+                        </h2>
+                        <div class="dc_discount">
+                            <h1 style="font-size: 6em; color: {{ section.settings.dc_buttonBackgroundColor }};">
+                                {{ block.settings.dc_textDiscount }}
+                            </h1>
+                            <h1 style="font-size: 3em; color: {{ section.settings.dc_buttonBackgroundColor }};">
+                                %
+                            </h1>
+                        </div>
+                        <h2 style="color: {{ section.settings.dc_backgroundColor }};">
+                            DE DESCONTO
+                        </h2>
+                    </div>
+                    <div class="dc_cardBot" style="background-color: {{ section.settings.dc_buttonBackgroundColor }};">
+                        <hr/>
+                        <h2 style="color: #fbfbfb;">
+                            USE: {{ block.settings.dc_TextCoupon }}
+                        </h2>
+                    </div>
+                </div>
+        {% endcase %}
+    {% endfor %}
+
+    
+</div>
+
+  
+  {% schema %}
+    {
+        "name": "Cupons de Desconto",
+        "settings": [
+        {
+            "id": "dc_backgroundImage",
+            "type": "image_picker",
+            "label": "Imagem de Fundo"            
+        },  
+        {
+            "id": "dc_backgroundColor",
+            "type": "color",
+            "label": "Cor do Fundo",
+            "default": "#0f25c9"
+        },
+        {
+            "id": "dc_logo",
+            "type": "image_picker",
+            "label": "Logotipo"            
+        },          
+        {
+            "id": "dc_logoSize",
+            "type": "text",
+            "label": "Tamanho da logo",
+            "default": "100px"
+        },
+        {
+          "id": "dc_headline",
+          "type": "text",
+          "label": "Titulo",
+          "default": "Insira aqui um bom Titulo!"
+        },
+        {
+            "id": "dc_headlineColor",
+            "type": "color",
+            "label": "Cor do Titulo",
+            "default": "#ffffff"
+        },
+        {
+          "id": "dc_description",
+          "type": "richtext",
+          "label": "Descrição",
+          "default": "<p>Insira aqui uma descrição atrativa e convincente.</p>"
+        },
+        {
+            "id": "dc_descriptionColor",
+            "type": "color",
+            "label": "Cor da Descrição",
+            "default": "#ffffff"
+        },
+        {
+          "id": "dc_buttonText",
+          "type": "text",
+          "label": "Texto do Botão",
+          "default": "Clique aqui"
+        },
+        {
+          "id": "dc_buttonLink",
+          "type": "text",
+          "label": "Link do Botão",
+          "default": "#"
+        },
+        {
+            "id": "dc_buttonTextColor",
+            "type": "color",
+            "label": "Cor de texto do botão",
+            "default": "#ffffff"
+        },
+        {
+            "id": "dc_buttonBackgroundColor",
+            "type": "color",
+            "label": "Cor de fundo do botão",
+            "default": "#e91d38"
+        }
+        ],
+        "blocks": [
+        {
+          "name": "Desconto",
+          "type": "card",
+          "limit": 4,
+          "settings": [
+            {
+              "id": "dc_textDiscount",
+              "type": "text",              
+              "label": "Porcentagem de Desconto",
+              "default": "5"
+            },
+            {
+                "id": "dc_TextCoupon",
+                "type": "text",              
+                "label": "Código do Cupom",
+                "default": "VCMERECE"
+              }
+          ]
+        }
+        ],
+        "presets": [
+        {
+          "name": "cupom-de-desconto",
+          "category": "Custom"
+        }
+        ]
+    }
+  {% endschema %}
