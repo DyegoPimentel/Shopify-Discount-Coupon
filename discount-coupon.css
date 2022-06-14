@@ -1,0 +1,108 @@
+.dc_container {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 35px 10% 200px 10%;
+    
+    
+}
+
+.dc_container h1 {
+    font-weight: bolder;
+    line-height: 1em;
+    margin: 0px;
+}
+
+.dc_container p {
+    font-size: 1.25em;
+    line-height: 1em;
+    margin: 15px 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.dc_button {
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    font-size: medium;
+}
+
+.dc_button:hover {
+    transition: 0.2s ease-in;
+    filter: contrast(150%);
+}
+
+.dc_cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -200px;
+
+}
+
+.dc_card {
+    text-align: center;
+    margin: 25px 10px;
+}
+
+.dc_card h1 {
+    font-weight: bolder;
+    margin: -10px 0px 0px 0px;
+    line-height: 1em;
+}
+
+.dc_card h2 {
+    font-weight: bolder;
+    margin: 0;
+}
+
+
+.dc_card hr {
+    border-top: dashed 3px #fbfbfb;
+    margin: 0px;
+    
+}
+
+.dc_cardTop {
+    background-color: #fbfbfb;
+    border-radius: 15px 15px 0 0;
+    padding: 15px 30px;
+}
+
+.dc_cardBot {
+    border-radius: 0 0 15px 15px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.dc_cardBot h2 {
+    padding: 5px 30px;
+    margin: 0px 0px;
+}
+
+.dc_discount {
+    display:flex; 
+    align-items: baseline; 
+    justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+    .dc_cards {
+        display: block;    
+    }
+    .grid-container {
+        display: block;
+    }
+}
